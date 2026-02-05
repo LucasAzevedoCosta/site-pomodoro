@@ -116,6 +116,7 @@ export const PomodoroLanding = () => {
           Explore os diferentes temas disponíveis no aplicativo
         </p>
 
+        {/* Miniaturas de Temas */}
         <div className="mb-8 flex justify-center gap-4 flex-wrap">
           {themes.map((theme, idx) => (
             <button
@@ -132,13 +133,14 @@ export const PomodoroLanding = () => {
               <img
                 src={theme.image}
                 alt={theme.name}
-                className="w-28 h-16 object-cover"
+                className="w-28 h-16 object-contain bg-black/5" // object-contain evita o corte
               />
             </button>
           ))}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {/* Imagem do Tema Selecionado */}
           <div
             className={`rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition ${
               darkMode
@@ -146,34 +148,30 @@ export const PomodoroLanding = () => {
                 : "bg-white border-slate-200"
             }`}
           >
-            <div className="aspect-video relative">
+            <div className="aspect-video relative bg-slate-900/5 flex items-center justify-center">
               <img
                 src={themes[selectedTheme].image}
                 alt={themes[selectedTheme].name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-center"
               />
-
             </div>
           </div>
 
           <div
-            className={`rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition ${darkMode ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
+            className={`rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition ${
+              darkMode
+                ? "bg-slate-800 border-slate-700"
+                : "bg-white border-slate-200"
+            }`}
           >
             <div
-              className={`aspect-video flex items-center justify-center ${darkMode ? "bg-slate-900" : "bg-slate-100"}`}
+              className={`aspect-video relative flex items-center justify-center ${darkMode ? "bg-slate-900" : "bg-slate-100"}`}
             >
-              <div className="text-center">
-                <div
-                  className={`text-xl mb-2 ${darkMode ? "text-slate-400" : "text-slate-600"}`}
-                >
-                  Configurações
-                </div>
-                <div
-                  className={`text-sm ${darkMode ? "text-slate-600" : "text-slate-500"}`}
-                >
-                  Personalize seu timer
-                </div>
-              </div>
+              <img
+                src="/src/assets/settings.png"
+                alt="Configuração do Timer"
+                className="w-full h-full object-center"
+              />
             </div>
           </div>
         </div>
@@ -221,14 +219,21 @@ export const PomodoroLanding = () => {
             </button>
           </div>
 
+          {/* Card macOS - Em Breve */}
           <div
-            className={`border rounded-lg p-8 text-center hover:shadow-md transition ${darkMode ? "bg-slate-800 border-slate-700 hover:border-purple-500" : "bg-white border-slate-200 hover:border-purple-200"}`}
+            className={`border rounded-lg p-8 text-center transition ${
+              darkMode
+                ? "bg-slate-800/50 border-slate-700"
+                : "bg-gray-50 border-slate-200"
+            }`}
           >
             <div
-              className={`w-16 h-16 mx-auto mb-4 rounded-lg flex items-center justify-center ${darkMode ? "bg-purple-950/50" : "bg-purple-50"}`}
+              className={`w-16 h-16 mx-auto mb-4 rounded-lg flex items-center justify-center ${
+                darkMode ? "bg-slate-700" : "bg-slate-200"
+              }`}
             >
               <svg
-                className={`w-10 h-10 ${darkMode ? "text-purple-400" : "text-purple-600"}`}
+                className={`w-10 h-10 ${darkMode ? "text-slate-500" : "text-slate-400"}`}
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -236,17 +241,20 @@ export const PomodoroLanding = () => {
               </svg>
             </div>
             <h3
-              className={`text-lg font-semibold mb-2 ${darkMode ? "text-white" : "text-slate-900"}`}
+              className={`text-lg font-semibold mb-2 ${darkMode ? "text-slate-500" : "text-slate-400"}`}
             >
               macOS
             </h3>
             <p
-              className={`text-sm mb-4 ${darkMode ? "text-slate-400" : "text-slate-600"}`}
+              className={`text-sm mb-4 ${darkMode ? "text-slate-600" : "text-slate-400"}`}
             >
-              macOS 11+
+              Indisponível no momento
             </p>
-            <button className="w-full px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm shadow-sm">
-              Download .dmg
+            <button
+              disabled
+              className="w-full px-6 py-2 bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-500 rounded-lg text-sm shadow-sm cursor-not-allowed"
+            >
+              Em breve
             </button>
           </div>
 
@@ -355,26 +363,47 @@ export const PomodoroLanding = () => {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer Section */}
       <footer
-        className={`border-t py-8 transition-colors ${darkMode ? "border-slate-800 bg-linear-to-b from-slate-900 to-purple-950/30" : "border-slate-200 bg-linear-to-b from-white to-purple-50"}`}
+        className={`border-t py-12 ${darkMode ? "bg-slate-900 border-slate-800" : "bg-white border-slate-200"}`}
       >
-        <div className="container mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Clock
-              className={`w-5 h-5 ${darkMode ? "text-purple-400" : "text-purple-600"}`}
-            />
-            <span
-              className={`font-semibold ${darkMode ? "text-white" : "text-slate-900"}`}
-            >
-              Pomodoro Timer
-            </span>
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-6 md:mb-0">
+              <p
+                className={`text-sm ${darkMode ? "text-slate-400" : "text-slate-600"}`}
+              >
+                © {new Date().getFullYear()}{" "}
+                <span className="font-semibold text-purple-500">
+                  Lucas Azevedo Costa
+                </span>
+                . Todos os direitos reservados.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-8">
+              <a
+                href="https://lucasazevedo.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-sm font-medium transition-colors hover:text-purple-500 ${
+                  darkMode ? "text-slate-300" : "text-slate-700"
+                }`}
+              >
+                Portfólio
+              </a>
+
+              <span
+                className={`h-4 w-px ${darkMode ? "bg-slate-700" : "bg-slate-300"}`}
+              ></span>
+
+              <p
+                className={`text-sm ${darkMode ? "text-slate-500" : "text-slate-400"}`}
+              >
+                Desenvolvido com carinho 🚀
+              </p>
+            </div>
           </div>
-          <p
-            className={`text-sm ${darkMode ? "text-slate-400" : "text-slate-600"}`}
-          >
-            Desenvolvido para aumentar sua produtividade
-          </p>
         </div>
       </footer>
     </div>
