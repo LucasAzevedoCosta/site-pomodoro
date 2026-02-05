@@ -1,61 +1,26 @@
 import { useState } from "react";
 import { Download, Clock, Check, ChevronDown, Moon, Sun } from "lucide-react";
+import { FaLinux } from "react-icons/fa";
 
 export const PomodoroLanding = () => {
   const [selectedTheme, setSelectedTheme] = useState(0);
   const [expandedUpdate, setExpandedUpdate] = useState<number | null>(0);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const themes = [
-    { name: "Dark-academia", color: "#8B7355" },
-    { name: "Cyberpunk", color: "#06B6D4" },
-    { name: "Midnight", color: "#3B82F6" },
-    { name: "Emerald", color: "#10B981" },
-  ];
-
-  const features = [
-    {
-      title: "Múltiplos Temas",
-      desc: "Escolha entre 4 temas elegantes e minimalistas",
-    },
-    {
-      title: "Personalizável",
-      desc: "Configure tempos de foco, pausas curtas e longas",
-    },
-    { title: "Notificações", desc: "Alertas discretos ao fim de cada ciclo" },
-    {
-      title: "Multiplataforma",
-      desc: "Disponível para Windows, macOS e Linux",
-    },
+    { name: "Dark-academia", image: "/src/assets/dark.png" },
+    { name: "Cyberpunk", image: "/src/assets/cyber.png" },
+    { name: "Midnight", image: "/src/assets/midnight.png" },
+    { name: "Emerald", image: "/src/assets/emerald.png" },
   ];
 
   const updates = [
-    {
-      version: "v1.2.0",
-      date: "22 Jan 2026",
-      changes: [
-        "Novo tema Emerald adicionado",
-        "Melhorias na performance do timer",
-        "Correção de bugs em notificações",
-        "Suporte para atalhos de teclado",
-      ],
-    },
-    {
-      version: "v1.1.0",
-      date: "10 Jan 2026",
-      changes: [
-        "Tema Midnight lançado",
-        "Sistema de contagem de ciclos",
-        "Melhor integração com sistema",
-        "Otimizações gerais",
-      ],
-    },
     {
       version: "v1.0.0",
       date: "01 Jan 2026",
       changes: [
         "Lançamento inicial",
-        "Temas Dark-academia e Cyberpunk",
+        "Temas Dark-academia, Cyberpunk, Midnight e Emerald",
         "Timer Pomodoro completo",
         "Configurações personalizáveis",
       ],
@@ -85,12 +50,6 @@ export const PomodoroLanding = () => {
               className={`transition ${darkMode ? "text-slate-300 hover:text-purple-400" : "text-slate-600 hover:text-purple-600"}`}
             >
               Demonstração
-            </a>
-            <a
-              href="#features"
-              className={`transition ${darkMode ? "text-slate-300 hover:text-purple-400" : "text-slate-600 hover:text-purple-600"}`}
-            >
-              Recursos
             </a>
             <a
               href="#download"
@@ -157,43 +116,43 @@ export const PomodoroLanding = () => {
           Explore os diferentes temas disponíveis no aplicativo
         </p>
 
-        <div className="mb-8 flex justify-center gap-3">
+        <div className="mb-8 flex justify-center gap-4 flex-wrap">
           {themes.map((theme, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedTheme(idx)}
-              className={`px-6 py-2 rounded-lg transition ${
+              className={`rounded-lg overflow-hidden border transition focus:outline-none ${
                 selectedTheme === idx
-                  ? "bg-purple-600 text-white shadow-sm"
+                  ? "border-purple-500 ring-2 ring-purple-500"
                   : darkMode
-                    ? "bg-slate-800 text-slate-300 border border-slate-700 hover:border-purple-500"
-                    : "bg-white text-slate-700 border border-slate-200 hover:border-purple-300"
+                    ? "border-slate-700 hover:border-purple-500"
+                    : "border-slate-200 hover:border-purple-300"
               }`}
             >
-              {theme.name}
+              <img
+                src={theme.image}
+                alt={theme.name}
+                className="w-28 h-16 object-cover"
+              />
             </button>
           ))}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           <div
-            className={`rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition ${darkMode ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
+            className={`rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition ${
+              darkMode
+                ? "bg-slate-800 border-slate-700"
+                : "bg-white border-slate-200"
+            }`}
           >
-            <div
-              className={`aspect-video flex items-center justify-center ${darkMode ? "bg-slate-900" : "bg-slate-100"}`}
-            >
-              <div className="text-center">
-                <div
-                  className={`text-4xl font-bold mb-2 ${darkMode ? "text-slate-500" : "text-slate-400"}`}
-                >
-                  25:00
-                </div>
-                <div
-                  className={`text-sm ${darkMode ? "text-slate-600" : "text-slate-500"}`}
-                >
-                  Timer Principal - {themes[selectedTheme].name}
-                </div>
-              </div>
+            <div className="aspect-video relative">
+              <img
+                src={themes[selectedTheme].image}
+                alt={themes[selectedTheme].name}
+                className="w-full h-full object-cover"
+              />
+
             </div>
           </div>
 
@@ -216,48 +175,6 @@ export const PomodoroLanding = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Features */}
-      <div
-        id="features"
-        className={`border-y py-20 transition-colors ${darkMode ? "bg-slate-800/50 border-slate-800" : "bg-white border-slate-200"}`}
-      >
-        <div className="container mx-auto px-6">
-          <h2
-            className={`text-3xl font-bold text-center mb-4 ${darkMode ? "text-white" : "text-slate-900"}`}
-          >
-            Recursos
-          </h2>
-          <p
-            className={`text-center mb-12 max-w-2xl mx-auto ${darkMode ? "text-slate-400" : "text-slate-600"}`}
-          >
-            Tudo que você precisa para gerenciar seu tempo de forma eficiente
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {features.map((feature, idx) => (
-              <div key={idx} className="text-center group">
-                <div
-                  className={`w-12 h-12 mx-auto mb-4 rounded-lg flex items-center justify-center transition ${darkMode ? "bg-purple-950/50 group-hover:bg-purple-900/50" : "bg-purple-100 group-hover:bg-purple-200"}`}
-                >
-                  <div
-                    className={`w-2 h-2 rounded-full ${darkMode ? "bg-purple-400" : "bg-purple-600"}`}
-                  ></div>
-                </div>
-                <h3
-                  className={`text-lg font-semibold mb-2 ${darkMode ? "text-white" : "text-slate-900"}`}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className={`text-sm ${darkMode ? "text-slate-400" : "text-slate-600"}`}
-                >
-                  {feature.desc}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -286,11 +203,7 @@ export const PomodoroLanding = () => {
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path d="M0 12C0 5.373 5.373 0 12 0c4.873 0 9.067 2.904 10.947 7.077l-15.87 15.87C2.904 21.067 0 16.873 0 12z" />
-                <path
-                  d="M12.004 24c-3.988 0-7.502-1.943-9.686-4.927l15.868-15.868C21.057 5.502 23 9.016 23 13.004A11.996 11.996 0 0112.004 24z"
-                  opacity=".4"
-                />
+                <path d="M0 3.449 9.75 2.1v9.4H0V3.449zm10.95-1.5L24 0v11.5H10.95V1.949zM0 12.55h9.75v9.4L0 20.55v-8zM10.95 12.55H24V24l-13.05-1.95v-9.5z" />
               </svg>
             </div>
             <h3
@@ -343,13 +256,9 @@ export const PomodoroLanding = () => {
             <div
               className={`w-16 h-16 mx-auto mb-4 rounded-lg flex items-center justify-center ${darkMode ? "bg-purple-950/50" : "bg-purple-50"}`}
             >
-              <svg
+              <FaLinux
                 className={`w-10 h-10 ${darkMode ? "text-purple-400" : "text-purple-600"}`}
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 15.445c-.223.448-.894 1.007-1.341 1.007-.447 0-.67-.224-.894-.447-.223-.224-.447-.448-.67-.448-.224 0-.448.224-.671.448-.224.223-.447.447-.894.447-.448 0-1.118-.56-1.341-1.007-.224-.447-.447-1.342-.447-2.013 0-1.789.894-2.684 2.013-2.684.447 0 .894.224 1.341.447.448.224.895.448 1.342.448.447 0 .894-.224 1.341-.448.447-.223.894-.447 1.341-.447 1.119 0 2.013.895 2.013 2.684 0 .671-.223 1.566-.447 2.013z" />
-              </svg>
+              />
             </div>
             <h3
               className={`text-lg font-semibold mb-2 ${darkMode ? "text-white" : "text-slate-900"}`}
