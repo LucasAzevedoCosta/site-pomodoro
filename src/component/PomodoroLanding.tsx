@@ -8,10 +8,10 @@ export const PomodoroLanding = () => {
   const [darkMode, setDarkMode] = useState(true);
 
   const themes = [
-    { name: "Dark-academia", image: "/src/assets/dark.png" },
-    { name: "Cyberpunk", image: "/src/assets/cyber.png" },
-    { name: "Midnight", image: "/src/assets/midnight.png" },
-    { name: "Emerald", image: "/src/assets/emerald.png" },
+    { name: "Dark-academia", image: "/assets/dark.png" },
+    { name: "Cyberpunk", image: "/assets/cyber.png" },
+    { name: "Midnight", image: "/assets/midnight.png" },
+    { name: "Emerald", image: "/assets/emerald.png" },
   ];
 
   const updates = [
@@ -168,7 +168,7 @@ export const PomodoroLanding = () => {
               className={`aspect-video relative flex items-center justify-center ${darkMode ? "bg-slate-900" : "bg-slate-100"}`}
             >
               <img
-                src="/src/assets/settings.png"
+                src="/assets/settings.png"
                 alt="Configuração do Timer"
                 className="w-full h-full object-center"
               />
